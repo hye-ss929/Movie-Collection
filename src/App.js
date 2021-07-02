@@ -1,18 +1,20 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Login from "./pages/Login";
+import Login from "./pages/Login/Login";
 import styled from "styled-components";
+import Collection from "./pages/Collection/Collection";
 
 function App({ authService }) {
   return (
     <AppContainer>
       <BrowserRouter>
         <Switch>
-          <Route
-            exct
-            paht="/"
-            render={() => <Login authService={authService} />}
-          />
+          <Route exact path="/">
+            <Login authService={authService} />
+          </Route>
+          <Route exact path="/collection">
+            <Collection authService={authService} />
+          </Route>
         </Switch>
       </BrowserRouter>
     </AppContainer>

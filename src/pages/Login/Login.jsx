@@ -1,12 +1,26 @@
-import React from "react";
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
+import React, { useEffect } from "react";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const Login = ({ authService }) => {
-  const onLogin = (e) => {
-    authService.login(e.currentTarget.alt).then(console.log);
+  const histroy = useHistory();
+  const goToCollection = (userId) => {
+    histroy.push({
+      pathname: "/collection",
+      state: { id: userId },
+    });
   };
+  const onLogin = (e) => {
+    authService
+      .login(e.currentTarget.alt)
+      .then((data) => goToCollection(data.user.uid));
+  };
+
+  useEffect(() => {
+    authService.onAuthChange((user) => user && goToCollection(user.uid));
+  });
   return (
     <LoginBox>
       <Header />
