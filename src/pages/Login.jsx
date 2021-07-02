@@ -3,14 +3,23 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import styled from "styled-components";
 
-const Login = () => {
+const Login = ({ authService }) => {
+  const onLogin = (e) => {
+    authService.login(e.currentTarget.alt).then(console.log);
+  };
   return (
     <LoginBox>
       <Header />
       <Loginsection>
         <p>간편로그인</p>
-        <Google src="/images/google-icon.png" alt="google" />
-        <Github src="/images/github.png" alt="github" />
+        <ImgBox>
+          <Google
+            onClick={onLogin}
+            src="/images/google-icon.png"
+            alt="Google"
+          />
+          <Github onClick={onLogin} src="/images/github.png" alt="Github" />
+        </ImgBox>
       </Loginsection>
       <Footer />
     </LoginBox>
@@ -24,14 +33,18 @@ const LoginBox = styled.section`
   flex-direction: column;
   width: 30%;
   height: 300px;
-  margin: 10% auto;
   background-color: #fff;
-  border-radius: 8px;
 `;
 
 const Loginsection = styled.section`
   width: 100%;
   height: 100%;
+
+  p {
+    padding: 1rem;
+    text-align: center;
+    font-weight: bold;
+  }
 `;
 
 const Google = styled.img`
@@ -40,3 +53,9 @@ const Google = styled.img`
 `;
 
 const Github = styled.img``;
+
+const ImgBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 6rem;
+`;

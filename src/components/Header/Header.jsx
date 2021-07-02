@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const Header = () => {
+const Header = ({ onLogout }) => {
   return (
     <HeaderBox>
+      {onLogout && <button onClick={onLogout}>Logout</button>}
       <img src="/images/movie.png" alt="logo" />
       <p>Movie Collection Card</p>
     </HeaderBox>
@@ -13,11 +14,10 @@ const Header = () => {
 export default Header;
 
 const HeaderBox = styled.header`
-  /* display: flex; */
   text-align: center;
 
   width: 100%;
-  background-color: pink;
+  background-color: #fddf46;
   padding: 0.5rem;
 
   p {

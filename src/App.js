@@ -3,18 +3,28 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import styled from "styled-components";
 
-function App() {
+function App({ authService }) {
   return (
-    <AppBox>
+    <AppContainer>
       <BrowserRouter>
         <Switch>
-          <Route exct paht="/" component={Login} />
+          <Route
+            exct
+            paht="/"
+            render={() => <Login authService={authService} />}
+          />
         </Switch>
       </BrowserRouter>
-    </AppBox>
+    </AppContainer>
   );
 }
 
 export default App;
 
-const AppBox = styled.div``;
+const AppContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
