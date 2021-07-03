@@ -48,7 +48,7 @@ const Collection = ({ authService }) => {
       name: "클루엘라",
       country: "미국",
       genre: "판타지",
-      star: 4,
+      star: 4.5,
       review:
         "오늘이블챌 마지막날이네돈을 줄지 안줄지는 모르겠다모의고사를 봤는데어제 긴장된다고 했잖음 그래서 2시에 자버렸는데전과목이 터져버렸는데내인생은 어떡하죠하지만 항상 할수 있을것만 같음할수있음그리고 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 ..",
       fileName: "Twilight",
@@ -56,6 +56,16 @@ const Collection = ({ authService }) => {
     },
     {
       id: 5,
+      name: "블랙위도우",
+      country: "미국",
+      genre: "판타지",
+      star: 4,
+      review: "재밌어요!",
+      fileName: "Twilight",
+      fileURL: "black.jpeg",
+    },
+    {
+      id: 6,
       name: "블랙위도우",
       country: "미국",
       genre: "판타지",
@@ -75,20 +85,35 @@ const Collection = ({ authService }) => {
     });
   });
 
+  const addMovieCard = (movie) => {
+    const update = [...movies, movie];
+    setMovise(update);
+  };
+
   return (
     <CollectionBox>
       <Header onLogout={onLogout} />
       <MoviesBox>
-        {/* <AddButton onClick={() => setClick(!click)}>추가하기</AddButton> */}
-        <Button name="추가하기" onClick={() => setClick(!click)} />
+        <Button
+          name="추가하기"
+          onClick={() => setClick(!click)}
+          top="10"
+          right="10"
+          color="#ff4676"
+        />
         {click && (
-          <AddMovie
-            handleChangeStar={handleChangeStar}
-            star={star}
-            movies={movies}
-          />
+          <FullPage>
+            <AddMovie
+              onChange={handleChangeStar}
+              star={star}
+              movies={movies}
+              addMovieCard={addMovieCard}
+              setClick={setClick}
+              setStar={setStar}
+            />
+          </FullPage>
         )}
-        <Preview movies={movies} />
+        <Preview movies={movies} click={click} />
       </MoviesBox>
       <Footer />
     </CollectionBox>
@@ -110,13 +135,15 @@ const MoviesBox = styled.div`
   justify-content: center;
   align-items: center;
   flex: 1;
-  padding: 5% 3%;
+  padding: 5% 0 5% 3.5%;
 `;
 
-const AddButton = styled.button`
-  position: absolute;
+const FullPage = styled.div`
+  position: fixed;
   top: 0;
-  right: 0;
-  width: 80px;
-  height: 30px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 10000;
 `;

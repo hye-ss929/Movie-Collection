@@ -36,5 +36,5 @@ const LogoutBtn = styled.button`
   font-size: 1rem;
   font-weight: bold;
   border-radius: 4px;
-  background-color: #ff4676;
+  background-color: #04286e;
 `;

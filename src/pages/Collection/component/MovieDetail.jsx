@@ -1,11 +1,11 @@
 import React from "react";
+import StarRate from "../../../components/StarRate/StarRate";
 import styled from "styled-components";
 
-const MovieDetail = ({ name, country, genre, star, review }) => {
+const MovieDetail = ({ name, country, genre, star, review, none }) => {
   return (
     <MobieDetailBox>
       <MovieName>{name}</MovieName>
-      <Tickets src="/images/movie-tickets.png" alt="tickets" />
       <TextBox>
         <Text>국가</Text>
         <p>{country}</p>
@@ -15,10 +15,10 @@ const MovieDetail = ({ name, country, genre, star, review }) => {
         <p>{genre}</p>
       </TextBox>
       <TextBox>
-        <Text>별점</Text>
-        <p>{star}</p>
+        <StarText>별점</StarText>
+        <StarRate star={star} none={none} />
       </TextBox>
-      <TextReview>리뷰</TextReview>
+      <TextReview>세줄 리뷰</TextReview>
       <ReviewBox>
         <p>{review}</p>
       </ReviewBox>
@@ -31,12 +31,13 @@ export default MovieDetail;
 const MobieDetailBox = styled.section`
   position: relative;
   width: 100%;
+  pointer-events: none;
 `;
 
 const MovieName = styled.p`
   width: 100%;
   height: fit-content;
-  margin-top: 20px;
+  margin: 20px 0 10px 0;
   padding: 15px 0;
   font-weight: bold;
   font-size: 1.2rem;
@@ -44,15 +45,9 @@ const MovieName = styled.p`
   border-bottom: 2px solid #000;
 `;
 
-const Tickets = styled.img`
-  position: absolute;
-  top: 100px;
-  right: 50px;
-  width: 64px;
-`;
 const TextBox = styled.div`
   display: flex;
-  margin-top: 10px;
+  height: fit-content;
   padding: 10px 15px;
   overflow: hidden;
 `;
@@ -75,8 +70,14 @@ const ReviewBox = styled.div`
   display: flex;
   margin-top: 10px;
   padding: 10px 15px;
-  /* border: 1px solid red; */
   p {
     overflow: auto;
   }
+`;
+
+const StarText = styled.p`
+  margin-top: 10px;
+  margin-right: 10px;
+  font-size: 1rem;
+  font-weight: bold;
 `;

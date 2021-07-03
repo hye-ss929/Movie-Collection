@@ -9,6 +9,6 @@ export default Footer;
 
 const FooterBox = styled.footer`
   width: 100%;
-  height: 50px;
+  height: 15px;
   background-color: #fddf46;
 `;

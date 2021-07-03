@@ -15,14 +15,16 @@ const MovieCard = ({
 }) => {
   const [movieClick, setMovieClick] = useState(false);
 
+  const onSetIsVisible = (active) => {
+    setMovieClick(active);
+  };
   return (
     <MovieCardBox
       key={id}
-      onMouseEnter={() => setMovieClick(!movieClick)}
-      onMouseLeave={() => setMovieClick(!movieClick)}
+      onMouseEnter={() => onSetIsVisible(true)}
+      onMouseLeave={() => setMovieClick(false)}
     >
       <PhotoTiket fileURL={fileURL} movieClick={movieClick} />
-
       {movieClick && (
         <MovieDetail
           name={name}
@@ -42,8 +44,7 @@ const MovieCardBox = styled.div`
   display: flex;
   width: 300px;
   height: 400px;
-  margin: 0 0 5% 0;
-  border: 1px solid blue;
+  margin: 0 3% 5% 0;
   background-color: #fff;
   border-radius: 8px;
   text-align: center;

@@ -3,11 +3,11 @@ import styled from "styled-components";
 import MovieCard from "./MovieCard";
 
 const Preview = ({ movies, click }) => {
-  console.log(movies);
   return (
-    <PreviewBox>
+    <PreviewBox click="click">
       {movies.map((movie) => (
         <MovieCard
+          key={movie.id}
           id={movie.id}
           name={movie.name}
           country={movie.country}
@@ -26,8 +26,8 @@ const Preview = ({ movies, click }) => {
 export default Preview;
 
 const PreviewBox = styled.section`
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  border: 1px solid red;
 `;
