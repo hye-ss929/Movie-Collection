@@ -16,7 +16,9 @@ const MovieDetail = ({ name, country, genre, star, review, none }) => {
       </TextBox>
       <TextBox>
         <StarText>별점</StarText>
-        <StarRate star={star} none={none} />
+        <StarBox>
+          <StarRate star={star} none={none} />
+        </StarBox>
       </TextBox>
       <TextReview>세줄 리뷰</TextReview>
       <ReviewBox>
@@ -31,7 +33,6 @@ export default MovieDetail;
 const MobieDetailBox = styled.section`
   position: relative;
   width: 100%;
-  pointer-events: none;
 `;
 
 const MovieName = styled.p`
@@ -80,4 +81,8 @@ const StarText = styled.p`
   margin-right: 10px;
   font-size: 1rem;
   font-weight: bold;
+`;
+
+const StarBox = styled.div`
+  pointer-events: none;
 `;

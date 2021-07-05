@@ -3,7 +3,7 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import AddMovie from "./component/AddMovie";
+import AddMovieModal from "./component/AddMovieModal";
 import Preview from "./component/Preview";
 import Button from "../../components/Button/Button";
 
@@ -50,7 +50,7 @@ const Collection = ({ authService }) => {
       genre: "판타지",
       star: 4.5,
       review:
-        "오늘이블챌 마지막날이네돈을 줄지 안줄지는 모르겠다모의고사를 봤는데어제 긴장된다고 했잖음 그래서 2시에 자버렸는데전과목이 터져버렸는데내인생은 어떡하죠하지만 항상 할수 있을것만 같음할수있음그리고 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 .. 음 크루엘라를 봤음 ..",
+        "오늘이블챌 마지막날이네돈을 줄지 안줄지는 모르겠다모의고사를 봤는데어제 긴장된다고 했잖음 ",
       fileName: "Twilight",
       fileURL: "cruella.jpeg",
     },
@@ -94,6 +94,9 @@ const Collection = ({ authService }) => {
     <CollectionBox>
       <Header onLogout={onLogout} />
       <MoviesBox>
+        <a href="https://github.com/hye-ss929/Movie-Collection">
+          <Button name="Github" top="10" right="180" color="#000" />
+        </a>
         <Button
           name="추가하기"
           onClick={() => setClick(!click)}
@@ -103,7 +106,7 @@ const Collection = ({ authService }) => {
         />
         {click && (
           <FullPage>
-            <AddMovie
+            <AddMovieModal
               onChange={handleChangeStar}
               star={star}
               movies={movies}

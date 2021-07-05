@@ -39,4 +39,5 @@ const ButtonBox = styled.button`
   border-radius: 8px;
   font-weight: bold;
   color: #fff;
+  cursor: pointer;
 `;

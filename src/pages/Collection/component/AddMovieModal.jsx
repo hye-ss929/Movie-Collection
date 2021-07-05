@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import Button from "../../../components/Button/Button";
 import StarRate from "../../../components/StarRate/StarRate";
-import AddFile from "../component/AddFile";
+import AddFile from "./AddFile";
 import { COUNTRY, GENRE } from "../MAPPING_OBJ";
 import styled from "styled-components";
 
-const AddMovie = ({ onChange, star, addMovieCard, setClick, setStar }) => {
+const AddMovieModal = ({ onChange, star, addMovieCard, setClick, setStar }) => {
   const titleRef = useRef();
   const countryRef = useRef();
   const genreRef = useRef();
@@ -30,6 +30,11 @@ const AddMovie = ({ onChange, star, addMovieCard, setClick, setStar }) => {
   return (
     <AddMovieBox>
       <Title>☀️ 영화기록하기 ☀️</Title>
+      <Close
+        src="/images/error.png"
+        alt="close"
+        onClick={() => setClick(false)}
+      />
       <InputBox>
         <InputName>✏️ 제목</InputName>
         <Input type="text" name="name" ref={titleRef} />
@@ -68,7 +73,7 @@ const AddMovie = ({ onChange, star, addMovieCard, setClick, setStar }) => {
   );
 };
 
-export default AddMovie;
+export default AddMovieModal;
 
 const AddMovieBox = styled.section`
   position: absolute;
@@ -81,6 +86,13 @@ const AddMovieBox = styled.section`
   border: 1px solid black;
   border-radius: 8px;
   z-index: 1;
+`;
+
+const Close = styled.img`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 `;
 
 const Title = styled.p`
