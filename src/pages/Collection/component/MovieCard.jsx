@@ -10,28 +10,30 @@ const MovieCard = ({
   genre,
   star,
   review,
-  fileName,
   fileURL,
+  deleteMovie,
 }) => {
   const [movieClick, setMovieClick] = useState(false);
 
   const onSetIsVisible = (active) => {
     setMovieClick(active);
   };
+
   return (
     <MovieCardBox
-      key={id}
       onMouseEnter={() => onSetIsVisible(true)}
       onMouseLeave={() => setMovieClick(false)}
     >
       <PhotoTiket fileURL={fileURL} movieClick={movieClick} />
       {movieClick && (
         <MovieDetail
+          id={id}
           name={name}
           country={country}
           genre={genre}
           star={star}
           review={review}
+          deleteMovie={deleteMovie}
         />
       )}
     </MovieCardBox>

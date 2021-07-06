@@ -1,8 +1,18 @@
 import React from "react";
 import StarRate from "../../../components/StarRate/StarRate";
 import styled from "styled-components";
+import Button from "../../../components/Button/Button";
 
-const MovieDetail = ({ name, country, genre, star, review, none }) => {
+const MovieDetail = ({
+  id,
+  name,
+  country,
+  genre,
+  star,
+  review,
+  none,
+  deleteMovie,
+}) => {
   return (
     <MobieDetailBox>
       <MovieName>{name}</MovieName>
@@ -24,6 +34,14 @@ const MovieDetail = ({ name, country, genre, star, review, none }) => {
       <ReviewBox>
         <p>{review}</p>
       </ReviewBox>
+      <Button
+        name="Delete"
+        color="#ff0000"
+        bottom="10"
+        right="20"
+        width="20"
+        onClick={() => deleteMovie(id)}
+      />
     </MobieDetailBox>
   );
 };

@@ -90,6 +90,10 @@ const Collection = ({ authService }) => {
     setMovise(update);
   };
 
+  const deleteMovie = (id) => {
+    setMovise(movies.filter((movie) => movie.id !== id));
+  };
+
   return (
     <CollectionBox>
       <Header onLogout={onLogout} />
@@ -116,7 +120,7 @@ const Collection = ({ authService }) => {
             />
           </FullPage>
         )}
-        <Preview movies={movies} click={click} />
+        <Preview movies={movies} click={click} deleteMovie={deleteMovie} />
       </MoviesBox>
       <Footer />
     </CollectionBox>

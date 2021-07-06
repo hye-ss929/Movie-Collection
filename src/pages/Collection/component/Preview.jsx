@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import MovieCard from "./MovieCard";
 
-const Preview = ({ movies, click }) => {
+const Preview = ({ movies, delefeModalOpen, deleteMovie }) => {
   return (
-    <PreviewBox click="click">
+    <PreviewBox>
       {movies.map((movie) => (
         <MovieCard
-          key={movie.id}
           id={movie.id}
+          key={movie.id}
           name={movie.name}
           country={movie.country}
           genre={movie.genre}
@@ -16,7 +16,8 @@ const Preview = ({ movies, click }) => {
           review={movie.review}
           fileName={movie.fileName}
           fileURL={movie.fileURL}
-          click={click}
+          delefeModalOpen={delefeModalOpen}
+          deleteMovie={deleteMovie}
         />
       ))}
     </PreviewBox>

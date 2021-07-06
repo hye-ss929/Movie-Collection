@@ -10,6 +10,7 @@ const Button = ({
   height,
   color,
   right,
+  left,
 }) => {
   return (
     <ButtonBox
@@ -20,6 +21,7 @@ const Button = ({
       height={height}
       color={color}
       right={right}
+      left={left}
     >
       {name}
     </ButtonBox>
@@ -31,6 +33,7 @@ export default Button;
 const ButtonBox = styled.button`
   position: absolute;
   top: ${(props) => props.top}px;
+  left: ${(props) => props.left} px;
   right: ${(props) => props.right || 0}px;
   bottom: ${(props) => props.bottom}px;
   width: ${(props) => props.width || 10}%;
