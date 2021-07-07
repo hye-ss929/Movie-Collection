@@ -1,15 +1,30 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
+import AddFile from "./AddFile";
 import Button from "../../../components/Button/Button";
 import StarRate from "../../../components/StarRate/StarRate";
-import AddFile from "./AddFile";
 import { COUNTRY, GENRE } from "../MAPPING_OBJ";
 import styled from "styled-components";
 
-const AddMovieModal = ({ onChange, star, addMovieCard, setClick, setStar }) => {
+const AddMovieModal = ({
+  imageUpload,
+  onChange,
+  star,
+  addMovieCard,
+  setClick,
+  setStar,
+}) => {
   const titleRef = useRef();
   const countryRef = useRef();
   const genreRef = useRef();
   const textRef = useRef();
+  const [file, setFile] = useState({ fileName: null, fileURL: null });
+
+  const onFileChange = (file) => {
+    setFile({
+      fileName: file.name,
+      fileURL: file.url,
+    });
+  };
 
   const onSubmit = () => {
     const movie = {
@@ -19,9 +34,10 @@ const AddMovieModal = ({ onChange, star, addMovieCard, setClick, setStar }) => {
       genre: genreRef.current.value,
       star: star,
       review: textRef.current.value,
-      fileName: "",
-      fileURL: "",
+      fileName: file.fileName,
+      fileURL: file.fileURL,
     };
+
     addMovieCard(movie);
     setClick(false);
     setStar(0);
@@ -57,7 +73,11 @@ const AddMovieModal = ({ onChange, star, addMovieCard, setClick, setStar }) => {
         <InputName>✏️ 세줄 후기</InputName>
         <Textarea id="review" name="review" ref={textRef} />
         <InputName>🏷 포스터</InputName>
-        <AddFile />
+        <AddFile
+          name={file.fileName}
+          onFileChange={onFileChange}
+          imageUpload={imageUpload}
+        />
         <Button
           name="등록하기"
           onClick={onSubmit}
@@ -130,4 +150,5 @@ const Textarea = styled.textarea`
   height: 70px;
   margin-bottom: 10px;
   padding: 10px;
+  resize: none;
 `;

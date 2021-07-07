@@ -7,7 +7,7 @@ import AddMovieModal from "./component/AddMovieModal";
 import Preview from "./component/Preview";
 import Button from "../../components/Button/Button";
 
-const Collection = ({ authService }) => {
+const Collection = ({ imageUpload, authService }) => {
   const history = useHistory();
   const [click, setClick] = useState(false);
   const [star, setStar] = useState(0);
@@ -21,7 +21,8 @@ const Collection = ({ authService }) => {
       star: 4,
       review: "재밌어요!",
       fileName: "killer",
-      fileURL: "bodyguard.jpeg",
+      fileURL:
+        "https://res.cloudinary.com/dutykggfv/image/upload/v1625639323/bodyguard_jf4etu.jpg",
     },
     {
       id: 2,
@@ -31,7 +32,8 @@ const Collection = ({ authService }) => {
       star: 5,
       review: "재밌어요!",
       fileName: "harry",
-      fileURL: "harry.jpeg",
+      fileURL:
+        "https://res.cloudinary.com/dutykggfv/image/upload/v1625639323/harry_f7r5yh.jpg",
     },
     {
       id: 3,
@@ -41,7 +43,8 @@ const Collection = ({ authService }) => {
       star: 4,
       review: "재밌어요!",
       fileName: "Twilight",
-      fileURL: "breaking.jpeg",
+      fileURL:
+        "https://res.cloudinary.com/dutykggfv/image/upload/v1625639323/breaking_tg81rd.jpg",
     },
     {
       id: 4,
@@ -52,7 +55,8 @@ const Collection = ({ authService }) => {
       review:
         "오늘이블챌 마지막날이네돈을 줄지 안줄지는 모르겠다모의고사를 봤는데어제 긴장된다고 했잖음 ",
       fileName: "Twilight",
-      fileURL: "cruella.jpeg",
+      fileURL:
+        "https://res.cloudinary.com/dutykggfv/image/upload/v1625639323/cruella_zl6xge.jpg",
     },
     {
       id: 5,
@@ -62,7 +66,8 @@ const Collection = ({ authService }) => {
       star: 4,
       review: "재밌어요!",
       fileName: "Twilight",
-      fileURL: "black.jpeg",
+      fileURL:
+        "https://res.cloudinary.com/dutykggfv/image/upload/v1625639323/black_hyfuxr.jpg",
     },
     {
       id: 6,
@@ -72,7 +77,8 @@ const Collection = ({ authService }) => {
       star: 4,
       review: "재밌어요!",
       fileName: "Twilight",
-      fileURL: "black.jpeg",
+      fileURL:
+        "https://res.cloudinary.com/dutykggfv/image/upload/v1625639323/black_hyfuxr.jpg",
     },
   ]);
   const onLogout = () => {
@@ -111,6 +117,7 @@ const Collection = ({ authService }) => {
         {click && (
           <FullPage>
             <AddMovieModal
+              imageUpload={imageUpload}
               onChange={handleChangeStar}
               star={star}
               movies={movies}
@@ -120,8 +127,16 @@ const Collection = ({ authService }) => {
             />
           </FullPage>
         )}
+
         <Preview movies={movies} click={click} deleteMovie={deleteMovie} />
       </MoviesBox>
+      <ScrollBox>
+        <UpScroll
+          onClick={() => window.scroll(0, 0)}
+          src="/images/up-arrow.png"
+          alt="up"
+        />
+      </ScrollBox>
       <Footer />
     </CollectionBox>
   );
@@ -153,4 +168,18 @@ const FullPage = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.75);
   z-index: 10000;
+`;
+
+const UpScroll = styled.img`
+  position: absolute;
+  right: 20px;
+  bottom: 30px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+`;
+
+const ScrollBox = styled.div`
+  position: relative;
+  flex-direction: flex-end;
 `;

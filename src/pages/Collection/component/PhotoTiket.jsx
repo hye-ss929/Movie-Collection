@@ -4,7 +4,7 @@ import styled from "styled-components";
 const PhotoTiket = ({ fileURL, movieClick }) => {
   return (
     <PhotoBox>
-      <Photo src={`/images/${fileURL}`} movieClick={movieClick && "none"} />
+      <Photo src={`${fileURL}`} movieClick={movieClick && "none"} />
     </PhotoBox>
   );
 };
