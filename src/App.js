@@ -4,7 +4,7 @@ import Login from "./pages/Login/Login";
 import styled from "styled-components";
 import Collection from "./pages/Collection/Collection";
 
-function App({ imageUpload, authService }) {
+function App({ imageUpload, authService, moviesDatabase }) {
   return (
     <AppContainer>
       <BrowserRouter>
@@ -13,7 +13,11 @@ function App({ imageUpload, authService }) {
             <Login authService={authService} />
           </Route>
           <Route exact path="/collection">
-            <Collection imageUpload={imageUpload} authService={authService} />
+            <Collection
+              imageUpload={imageUpload}
+              authService={authService}
+              moviesDatabase={moviesDatabase}
+            />
           </Route>
         </Switch>
       </BrowserRouter>

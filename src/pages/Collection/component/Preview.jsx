@@ -2,23 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import MovieCard from "./MovieCard";
 
-const Preview = ({ movies, delefeModalOpen, deleteMovie }) => {
+const Preview = ({ movies, deleteMovie }) => {
   return (
     <PreviewBox>
-      {movies.map((movie) => (
-        <MovieCard
-          id={movie.id}
-          key={movie.id}
-          name={movie.name}
-          country={movie.country}
-          genre={movie.genre}
-          star={movie.star}
-          review={movie.review}
-          fileName={movie.fileName}
-          fileURL={movie.fileURL}
-          delefeModalOpen={delefeModalOpen}
-          deleteMovie={deleteMovie}
-        />
+      {Object.keys(movies).map((key) => (
+        <MovieCard key={key} movie={movies[key]} deleteMovie={deleteMovie} />
       ))}
     </PreviewBox>
   );

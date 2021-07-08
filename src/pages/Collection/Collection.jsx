@@ -7,83 +7,22 @@ import AddMovieModal from "./component/AddMovieModal";
 import Preview from "./component/Preview";
 import Button from "../../components/Button/Button";
 
-const Collection = ({ imageUpload, authService }) => {
+const Collection = ({ imageUpload, authService, moviesDatabase }) => {
   const history = useHistory();
+  const userId = history.location.state.id;
   const [click, setClick] = useState(false);
   const [star, setStar] = useState(0);
   const handleChangeStar = (state) => setStar(state);
-  const [movies, setMovise] = useState([
-    {
-      id: 1,
-      name: "킬러의 보디가드2",
-      country: "미국",
-      genre: "액션",
-      star: 4,
-      review: "재밌어요!",
-      fileName: "killer",
-      fileURL:
-        "https://res.cloudinary.com/dutykggfv/image/upload/v1625639323/bodyguard_jf4etu.jpg",
-    },
-    {
-      id: 2,
-      name: "해리포터와 죽음의 성물 - 2부",
-      country: "영국",
-      genre: "판타지",
-      star: 5,
-      review: "재밌어요!",
-      fileName: "harry",
-      fileURL:
-        "https://res.cloudinary.com/dutykggfv/image/upload/v1625639323/harry_f7r5yh.jpg",
-    },
-    {
-      id: 3,
-      name: "트와일라잇 - 브레이킹던",
-      country: "미국",
-      genre: "판타지",
-      star: 4,
-      review: "재밌어요!",
-      fileName: "Twilight",
-      fileURL:
-        "https://res.cloudinary.com/dutykggfv/image/upload/v1625639323/breaking_tg81rd.jpg",
-    },
-    {
-      id: 4,
-      name: "클루엘라",
-      country: "미국",
-      genre: "판타지",
-      star: 4.5,
-      review:
-        "오늘이블챌 마지막날이네돈을 줄지 안줄지는 모르겠다모의고사를 봤는데어제 긴장된다고 했잖음 ",
-      fileName: "Twilight",
-      fileURL:
-        "https://res.cloudinary.com/dutykggfv/image/upload/v1625639323/cruella_zl6xge.jpg",
-    },
-    {
-      id: 5,
-      name: "블랙위도우",
-      country: "미국",
-      genre: "판타지",
-      star: 4,
-      review: "재밌어요!",
-      fileName: "Twilight",
-      fileURL:
-        "https://res.cloudinary.com/dutykggfv/image/upload/v1625639323/black_hyfuxr.jpg",
-    },
-    {
-      id: 6,
-      name: "블랙위도우",
-      country: "미국",
-      genre: "판타지",
-      star: 4,
-      review: "재밌어요!",
-      fileName: "Twilight",
-      fileURL:
-        "https://res.cloudinary.com/dutykggfv/image/upload/v1625639323/black_hyfuxr.jpg",
-    },
-  ]);
+  const [movies, setMovise] = useState({});
   const onLogout = () => {
     authService.logout();
   };
+
+  useEffect(() => {
+    moviesDatabase.snapshotMovie(userId, (movies) => {
+      setMovise(movies);
+    });
+  }, [userId]);
 
   useEffect(() => {
     authService.onAuthChange((user) => {
@@ -92,12 +31,21 @@ const Collection = ({ imageUpload, authService }) => {
   });
 
   const addMovieCard = (movie) => {
-    const update = [...movies, movie];
-    setMovise(update);
+    setMovise((movies) => {
+      const update = { ...movies };
+      update[movie.id] = movie;
+      return update;
+    });
+    moviesDatabase.saveMovie(userId, movie);
   };
 
-  const deleteMovie = (id) => {
-    setMovise(movies.filter((movie) => movie.id !== id));
+  const deleteMovie = (movie) => {
+    setMovise((movies) => {
+      const update = { ...movies };
+      delete update[movie.id];
+      return update;
+    });
+    moviesDatabase.removeMovie(userId, movie);
   };
 
   return (

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from "../../../components/Button/Button";
 
 const MovieDetail = ({
-  id,
+  movie,
   name,
   country,
   genre,
@@ -13,6 +13,9 @@ const MovieDetail = ({
   none,
   deleteMovie,
 }) => {
+  const onClick = () => {
+    deleteMovie(movie);
+  };
   return (
     <MobieDetailBox>
       <MovieName>{name}</MovieName>
@@ -40,7 +43,7 @@ const MovieDetail = ({
         bottom="10"
         right="20"
         width="20"
-        onClick={() => deleteMovie(id)}
+        onClick={onClick}
       />
     </MobieDetailBox>
   );

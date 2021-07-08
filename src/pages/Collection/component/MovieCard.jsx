@@ -3,16 +3,8 @@ import PhotoTiket from "./PhotoTiket";
 import styled from "styled-components";
 import MovieDetail from "./MovieDetail";
 
-const MovieCard = ({
-  id,
-  name,
-  country,
-  genre,
-  star,
-  review,
-  fileURL,
-  deleteMovie,
-}) => {
+const MovieCard = ({ movie, deleteMovie }) => {
+  const { id, name, country, genre, star, review, fileURL } = movie;
   const [movieClick, setMovieClick] = useState(false);
 
   const onSetIsVisible = (active) => {
@@ -33,6 +25,7 @@ const MovieCard = ({
           genre={genre}
           star={star}
           review={review}
+          movie={movie}
           deleteMovie={deleteMovie}
         />
       )}
