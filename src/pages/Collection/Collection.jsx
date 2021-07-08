@@ -13,14 +13,14 @@ const Collection = ({ imageUpload, authService, moviesDatabase }) => {
   const [click, setClick] = useState(false);
   const [star, setStar] = useState(0);
   const handleChangeStar = (state) => setStar(state);
-  const [movies, setMovise] = useState({});
+  const [movies, setMovies] = useState({});
   const onLogout = () => {
     authService.logout();
   };
 
   useEffect(() => {
     moviesDatabase.snapshotMovie(userId, (movies) => {
-      setMovise(movies);
+      setMovies(movies);
     });
   }, [userId]);
 
@@ -31,7 +31,7 @@ const Collection = ({ imageUpload, authService, moviesDatabase }) => {
   });
 
   const addMovieCard = (movie) => {
-    setMovise((movies) => {
+    setMovies((movies) => {
       const update = { ...movies };
       update[movie.id] = movie;
       return update;
@@ -40,7 +40,7 @@ const Collection = ({ imageUpload, authService, moviesDatabase }) => {
   };
 
   const deleteMovie = (movie) => {
-    setMovise((movies) => {
+    setMovies((movies) => {
       const update = { ...movies };
       delete update[movie.id];
       return update;
