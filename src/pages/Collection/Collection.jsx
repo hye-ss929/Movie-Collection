@@ -14,6 +14,7 @@ const Collection = ({ imageUpload, authService, moviesDatabase }) => {
   const [star, setStar] = useState(0);
   const handleChangeStar = (state) => setStar(state);
   const [movies, setMovies] = useState({});
+
   const onLogout = () => {
     authService.logout();
   };
@@ -75,7 +76,6 @@ const Collection = ({ imageUpload, authService, moviesDatabase }) => {
             />
           </FullPage>
         )}
-
         <Preview movies={movies} click={click} deleteMovie={deleteMovie} />
       </MoviesBox>
       <ScrollBox>

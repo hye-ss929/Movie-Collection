@@ -5,6 +5,7 @@ import MovieDetail from "./MovieDetail";
 
 const MovieCard = ({ movie, deleteMovie }) => {
   const { id, name, country, genre, star, review, fileURL } = movie;
+
   const [movieClick, setMovieClick] = useState(false);
 
   const onSetIsVisible = (active) => {

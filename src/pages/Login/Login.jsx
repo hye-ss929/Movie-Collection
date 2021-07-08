@@ -18,6 +18,9 @@ const Login = ({ authService }) => {
       .then((data) => goToCollection(data.user.uid));
   };
 
+  const noUserGoToCollection = () => {
+    authService.loginAnonymously();
+  };
   useEffect(() => {
     authService.onAuthChange((user) => user && goToCollection(user.uid));
   });
@@ -33,6 +36,11 @@ const Login = ({ authService }) => {
             alt="Google"
           />
           <Github onClick={onLogin} src="/images/github.png" alt="Github" />
+          <NonUser
+            onClick={noUserGoToCollection}
+            src="/images/user.png"
+            alt="nonUser"
+          />
         </ImgBox>
       </Loginsection>
       <Footer />
@@ -68,6 +76,7 @@ const Google = styled.img`
 
 const Github = styled.img``;
 
+const NonUser = styled.img``;
 const ImgBox = styled.div`
   display: flex;
   justify-content: space-between;

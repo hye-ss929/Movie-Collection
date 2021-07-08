@@ -6,6 +6,11 @@ class AuthService {
     const authProvider = new firebase.auth[`${providerName}AuthProvider`]();
     return firebaseApp.auth().signInWithPopup(authProvider);
   }
+
+  loginAnonymously() {
+    return firebase.auth().signInAnonymously();
+  }
+
   onAuthChange(onUserChanged) {
     firebase.auth().onAuthStateChanged((user) => {
       onUserChanged(user);
