@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import { ThemeProvider } from "styled-components";
+import theme from "./styles/theme";
 import GlobalStyles from "./styles/GlobalStyles";
 import AuthService from "./service/auth_service";
 import ImageUpload from "./service/ImageUpload";
@@ -12,11 +14,13 @@ const moviesDatabase = new MoviesDatabase();
 ReactDOM.render(
   <>
     <GlobalStyles />
-    <App
-      authService={authService}
-      imageUpload={imageUpload}
-      moviesDatabase={moviesDatabase}
-    />
+    <ThemeProvider theme={theme}>
+      <App
+        authService={authService}
+        imageUpload={imageUpload}
+        moviesDatabase={moviesDatabase}
+      />
+    </ThemeProvider>
   </>,
   document.getElementById("root")
 );

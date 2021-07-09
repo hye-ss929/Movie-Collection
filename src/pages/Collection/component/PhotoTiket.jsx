@@ -1,13 +1,13 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 
-const PhotoTiket = ({ fileURL, movieClick }) => {
+const PhotoTiket = memo(({ fileURL, movieClick }) => {
   return (
     <PhotoBox>
       <Photo src={`${fileURL}`} movieClick={movieClick && "none"} />
     </PhotoBox>
   );
-};
+});
 
 export default PhotoTiket;
 

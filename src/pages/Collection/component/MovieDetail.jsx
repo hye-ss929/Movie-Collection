@@ -1,7 +1,7 @@
 import React from "react";
 import StarRate from "../../../components/StarRate/StarRate";
-import styled from "styled-components";
 import Button from "../../../components/Button/Button";
+import styled from "styled-components";
 
 const MovieDetail = ({
   movie,
@@ -63,8 +63,8 @@ const MovieName = styled.p`
   padding: 15px 0;
   font-weight: bold;
   font-size: 1.2rem;
-  border-top: 2px solid #000;
-  border-bottom: 2px solid #000;
+  border-top: 2px solid ${(props) => props.theme.basicBlack};
+  border-bottom: 2px solid ${(props) => props.theme.basicBlack};
 `;
 
 const TextBox = styled.div`

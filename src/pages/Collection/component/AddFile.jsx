@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { memo, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 
-const AddFile = ({ imageUpload, name, onFileChange }) => {
+const AddFile = memo(({ imageUpload, name, onFileChange }) => {
   const [loading, setLoading] = useState(false);
   const inputRef = useRef();
 
@@ -29,13 +29,12 @@ const AddFile = ({ imageUpload, name, onFileChange }) => {
         onChange={onImageChange}
       />
       {!loading && (
-        <Button onClick={onButtonClick}>{name || "No File !"}</Button>
+        <Button onClick={onButtonClick}>{name || "눌러서 추가하기"}</Button>
       )}
       {loading && <LoadingBox></LoadingBox>}
     </>
   );
-};
-
+});
 export default AddFile;
 
 const Uploadbutton = styled.input`
@@ -65,6 +64,6 @@ const LoadingBox = styled.div`
   margin: 15px 0 0 30px;
   border-radius: 50%;
   border: 1px solid gray;
-  border-top: 1px solid #ff4676;
+  border-top: 1px solid ${(props) => props.theme.pointPink};
   animation: ${LoadingSpin} 2s infinite;
 `;

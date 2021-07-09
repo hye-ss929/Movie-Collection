@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PhotoTiket from "./PhotoTiket";
-import styled from "styled-components";
 import MovieDetail from "./MovieDetail";
+import styled from "styled-components";
 
 const MovieCard = ({ movie, deleteMovie }) => {
   const { id, name, country, genre, star, review, fileURL } = movie;
@@ -41,7 +41,11 @@ const MovieCardBox = styled.div`
   width: 300px;
   height: 400px;
   margin: 0 3% 5% 0;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.basicWhite};
   border-radius: 8px;
   text-align: center;
+
+  @media ${(props) => props.theme.mobile} {
+    margin: 10% 3%;
+  }
 `;

@@ -1,97 +1,92 @@
-import React, { useState, useRef } from "react";
-import AddFile from "./AddFile";
+import React, { useState, useRef, memo } from "react";
+import { COUNTRY, GENRE } from "../MAPPING_OBJ";
 import Button from "../../../components/Button/Button";
 import StarRate from "../../../components/StarRate/StarRate";
-import { COUNTRY, GENRE } from "../MAPPING_OBJ";
+import AddFile from "./AddFile";
 import styled from "styled-components";
 
-const AddMovieModal = ({
-  imageUpload,
-  onChange,
-  star,
-  addMovieCard,
-  setClick,
-  setStar,
-}) => {
-  const titleRef = useRef();
-  const countryRef = useRef();
-  const genreRef = useRef();
-  const textRef = useRef();
-  const [file, setFile] = useState({ fileName: null, fileURL: null });
+const AddMovieModal = memo(
+  ({ imageUpload, onChange, star, addMovieCard, setClick, setStar }) => {
+    const titleRef = useRef();
+    const countryRef = useRef();
+    const genreRef = useRef();
+    const textRef = useRef();
+    const [file, setFile] = useState({ fileName: null, fileURL: null });
 
-  const onFileChange = (file) => {
-    setFile({
-      fileName: file.name,
-      fileURL: file.url,
-    });
-  };
-
-  const onSubmit = () => {
-    const movie = {
-      id: Date.now(),
-      name: titleRef.current.value,
-      country: countryRef.current.value,
-      genre: genreRef.current.value,
-      star: star,
-      review: textRef.current.value,
-      fileName: file.fileName,
-      fileURL: file.fileURL,
+    const onFileChange = (file) => {
+      setFile({
+        fileName: file.name,
+        fileURL: file.url,
+      });
     };
 
-    addMovieCard(movie);
-    setClick(false);
-    setStar(0);
-  };
+    const onSubmit = () => {
+      const movie = {
+        id: Date.now(),
+        name: titleRef.current.value,
+        country: countryRef.current.value,
+        genre: genreRef.current.value,
+        star: star,
+        review: textRef.current.value,
+        fileName: file.fileName,
+        fileURL: file.fileURL,
+      };
 
-  return (
-    <AddMovieBox>
-      <Title>☀️ 영화기록하기 ☀️</Title>
-      <Close
-        src="/images/error.png"
-        alt="close"
-        onClick={() => setClick(false)}
-      />
-      <InputBox>
-        <InputName>✏️ 제목</InputName>
-        <Input type="text" name="name" ref={titleRef} />
-        <InputName>✏️ 국가</InputName>
-        <SelectBox name="country" ref={countryRef}>
-          {COUNTRY.map((country) => (
-            <option key={country.id}>{country.name}</option>
-          ))}
-        </SelectBox>
-        <InputName>✏️ 장르</InputName>
-        <SelectBox name="genre" ref={genreRef}>
-          {GENRE.map((genre) => (
-            <option key={genre.id} onChange={genre.name}>
-              {genre.name}
-            </option>
-          ))}
-        </SelectBox>
-        <InputName>✏️ 평점</InputName>
-        <StarRate onChange={onChange} star={star} />
-        <InputName>✏️ 세줄 후기</InputName>
-        <Textarea id="review" name="review" ref={textRef} />
-        <InputName>🏷 포스터</InputName>
-        <AddFile
-          name={file.fileName}
-          onFileChange={onFileChange}
-          imageUpload={imageUpload}
+      addMovieCard(movie);
+      setClick(false);
+      setStar(0);
+    };
+
+    return (
+      <AddMovieBox>
+        <Title>☀️ 영화기록하기 ☀️</Title>
+        <Close
+          src="/images/error.png"
+          alt="close"
+          onClick={() => setClick(false)}
         />
-        <Button
-          name="등록하기"
-          onClick={onSubmit}
-          bottom="0"
-          width="100"
-          height="50"
-          color="#ff4676"
-          setClick={setClick}
-          type="submit"
-        />
-      </InputBox>
-    </AddMovieBox>
-  );
-};
+        <InputBox>
+          <InputName>✏️ 제목</InputName>
+          <Input type="text" name="name" ref={titleRef} />
+          <InputName>✏️ 국가</InputName>
+          <SelectBox name="country" ref={countryRef}>
+            {COUNTRY.map((country) => (
+              <option key={country.id}>{country.name}</option>
+            ))}
+          </SelectBox>
+          <InputName>✏️ 장르</InputName>
+          <SelectBox name="genre" ref={genreRef}>
+            {GENRE.map((genre) => (
+              <option key={genre.id} onChange={genre.name}>
+                {genre.name}
+              </option>
+            ))}
+          </SelectBox>
+          <InputName>✏️ 평점</InputName>
+          <StarRate onChange={onChange} star={star} />
+          <InputName>✏️ 세줄 후기</InputName>
+          <Textarea id="review" name="review" ref={textRef} />
+          <InputName>🏷 포스터</InputName>
+          <AddFile
+            name={file.fileName}
+            onFileChange={onFileChange}
+            imageUpload={imageUpload}
+          />
+          <Button
+            name="등록하기"
+            onClick={onSubmit}
+            bottom="0"
+            width="100"
+            height="50"
+            color="#ff4676"
+            setClick={setClick}
+            type="submit"
+          />
+        </InputBox>
+      </AddMovieBox>
+    );
+  }
+);
 
 export default AddMovieModal;
 
@@ -102,10 +97,14 @@ const AddMovieBox = styled.section`
   transform: translate(-50%, -50%);
   width: 400px;
   height: 600px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.basicWhite};
   border: 1px solid black;
   border-radius: 8px;
   z-index: 1;
+
+  @media ${(props) => props.theme.mobile} {
+    width: 100%;
+  }
 `;
 
 const Close = styled.img`

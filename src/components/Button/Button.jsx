@@ -1,33 +1,36 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 
-const Button = ({
-  onClick,
-  name,
-  top,
-  bottom,
-  width,
-  height,
-  color,
-  right,
-  left,
-}) => {
-  return (
-    <ButtonBox
-      onClick={onClick}
-      bottom={bottom}
-      top={top}
-      width={width}
-      height={height}
-      color={color}
-      right={right}
-      left={left}
-    >
-      {name}
-    </ButtonBox>
-  );
-};
-
+const Button = memo(
+  ({
+    onClick,
+    name,
+    top,
+    bottom,
+    width,
+    height,
+    color,
+    right,
+    left,
+    marginBottom,
+  }) => {
+    return (
+      <ButtonBox
+        onClick={onClick}
+        bottom={bottom}
+        top={top}
+        width={width}
+        height={height}
+        color={color}
+        right={right}
+        left={left}
+        marginBottom={marginBottom}
+      >
+        {name}
+      </ButtonBox>
+    );
+  }
+);
 export default Button;
 
 const ButtonBox = styled.button`
@@ -41,6 +44,10 @@ const ButtonBox = styled.button`
   background-color: ${(props) => props.color};
   border-radius: 8px;
   font-weight: bold;
-  color: #fff;
+  color: ${(props) => props.theme.basicWhite};
   cursor: pointer;
+
+  @media ${(props) => props.theme.mobile} {
+    width: ${(props) => props.width}%;
+  }
 `;

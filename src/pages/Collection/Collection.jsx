@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import { useHistory } from "react-router-dom";
-import styled from "styled-components";
 import AddMovieModal from "./component/AddMovieModal";
 import Preview from "./component/Preview";
 import Button from "../../components/Button/Button";
+import styled from "styled-components";
 
 const Collection = ({ imageUpload, authService, moviesDatabase }) => {
   const history = useHistory();
@@ -15,21 +15,21 @@ const Collection = ({ imageUpload, authService, moviesDatabase }) => {
   const handleChangeStar = (state) => setStar(state);
   const [movies, setMovies] = useState({});
 
-  const onLogout = () => {
+  const onLogout = useCallback(() => {
     authService.logout();
-  };
+  }, [authService]);
 
   useEffect(() => {
     moviesDatabase.snapshotMovie(userId, (movies) => {
       setMovies(movies);
     });
-  }, [userId]);
+  }, [moviesDatabase, userId]);
 
   useEffect(() => {
     authService.onAuthChange((user) => {
       !user && history.push("/");
     });
-  });
+  }, [authService, history]);
 
   const addMovieCard = (movie) => {
     setMovies((movies) => {
@@ -53,14 +53,12 @@ const Collection = ({ imageUpload, authService, moviesDatabase }) => {
     <CollectionBox>
       <Header onLogout={onLogout} />
       <MoviesBox>
-        <a href="https://github.com/hye-ss929/Movie-Collection">
-          <Button name="Github" top="10" right="180" color="#000" />
-        </a>
         <Button
           name="추가하기"
           onClick={() => setClick(!click)}
           top="10"
           right="10"
+          width="20"
           color="#ff4676"
         />
         {click && (
@@ -85,7 +83,7 @@ const Collection = ({ imageUpload, authService, moviesDatabase }) => {
           alt="up"
         />
       </ScrollBox>
-      <Footer />
+      <Footer onLogout={onLogout} />
     </CollectionBox>
   );
 };
@@ -106,6 +104,12 @@ const MoviesBox = styled.div`
   align-items: center;
   flex: 1;
   padding: 5% 0 5% 3.5%;
+
+  @media ${(props) => props.theme.mobileS} {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
 `;
 
 const FullPage = styled.div`
@@ -125,9 +129,17 @@ const UpScroll = styled.img`
   width: 32px;
   height: 32px;
   cursor: pointer;
+  @media ${(props) => props.theme.mobile} {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
 `;
 
 const ScrollBox = styled.div`
   position: relative;
   flex-direction: flex-end;
+  @media ${(props) => props.theme.mobile} {
+    margin: 10px;
+  }
 `;

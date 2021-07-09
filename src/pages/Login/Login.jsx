@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 
-const Login = ({ authService }) => {
+const Login = memo(({ authService }) => {
   const histroy = useHistory();
   const goToCollection = (userId) => {
     histroy.push({
@@ -30,13 +30,13 @@ const Login = ({ authService }) => {
       <Loginsection>
         <p>간편로그인</p>
         <ImgBox>
-          <Google
+          <LoginIcon
             onClick={onLogin}
             src="/images/google-icon.png"
             alt="Google"
           />
-          <Github onClick={onLogin} src="/images/github.png" alt="Github" />
-          <NonUser
+          <LoginIcon onClick={onLogin} src="/images/github.png" alt="Github" />
+          <LoginIcon
             onClick={noUserGoToCollection}
             src="/images/user.png"
             alt="nonUser"
@@ -46,16 +46,28 @@ const Login = ({ authService }) => {
       <Footer />
     </LoginBox>
   );
-};
-
+});
 export default Login;
 
 const LoginBox = styled.section`
   display: flex;
   flex-direction: column;
-  width: 30%;
-  height: 300px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.basicWhite};
+  @media ${(props) => props.theme.desktop} {
+    width: 30%;
+  }
+  @media ${(props) => props.theme.laptop} {
+    width: 50%;
+  }
+  @media ${(props) => props.theme.tablet} {
+    width: 50%;
+  }
+  @media ${(props) => props.theme.mobile} {
+    width: 70%;
+  }
+  @media ${(props) => props.theme.mobileS} {
+    width: 90%;
+  }
 `;
 
 const Loginsection = styled.section`
@@ -69,16 +81,27 @@ const Loginsection = styled.section`
   }
 `;
 
-const Google = styled.img`
-  width: 64px;
-  height: 64px;
+const LoginIcon = styled.img`
+  width: 4rem;
+  height: 4rem;
+  cursor: pointer;
+
+  @media ${(props) => props.theme.mobile} {
+    width: 3rem;
+    height: 3rem;
+  }
 `;
 
-const Github = styled.img``;
-
-const NonUser = styled.img``;
 const ImgBox = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 1rem 6rem;
+  padding: 1rem 3rem;
+
+  @media ${(props) => props.theme.mobile} {
+    padding: 1rem 2rem;
+  }
+
+  @media ${(props) => props.theme.tablet} {
+    padding: 1rem;
+  }
 `;
