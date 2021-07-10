@@ -9,7 +9,6 @@
 <li>React에 대한 이해를 높이기 위한 프로젝트</li>
 <li>Firebase, Cloudinary를 통한 API 문서 학습</li>
 <li>Service(통신)과 View 컴포넌트 로직 분리</li>
-<li>Service(통신)과 View 컴포넌트 로직 분리</li>
 
 ## Development stack
 
@@ -32,6 +31,7 @@
 <img src='https://images.velog.io/images/hyehye/post/c1245a74-107b-4618-9ef5-c9bc91d86977/ezgif.com-gif-maker.gif'/>
 
 `익명인증을 통한 로그인`
+
 <img src='https://images.velog.io/images/hyehye/post/27e0b539-ff67-492f-8ed6-74b1774d8943/ezgif.com-gif-maker%20(1).gif'/>
 
 ### Collection
