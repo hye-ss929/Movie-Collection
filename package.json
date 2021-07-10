@@ -27,6 +27,7 @@
       "react-app/jest"
     ]
   },
+  "homepage": "https://moviecard-collection.netlify.app/",
   "browserslist": {
     "production": [
       ">0.2%",
