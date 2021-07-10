@@ -47,7 +47,16 @@ const ButtonBox = styled.button`
   color: ${(props) => props.theme.basicWhite};
   cursor: pointer;
 
+  @media ${(props) => props.theme.desktop} {
+    width: ${(props) => props.width}%;
+  }
+  @media ${(props) => props.theme.laptop} {
+    width: ${(props) => props.width}%;
+  }
   @media ${(props) => props.theme.mobile} {
+    width: ${(props) => props.width}%;
+  }
+  @media ${(props) => props.theme.mobileS} {
     width: ${(props) => props.width}%;
   }
 `;
