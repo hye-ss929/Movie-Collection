@@ -1,4 +1,4 @@
-import React, { memo, useRef, useState } from "react";
+import React, { memo, useRef, useState, Fragment } from "react";
 import styled, { keyframes } from "styled-components";
 
 const AddFile = memo(({ imageUpload, name, onFileChange }) => {
@@ -20,7 +20,7 @@ const AddFile = memo(({ imageUpload, name, onFileChange }) => {
     });
   };
   return (
-    <>
+    <Fragment>
       <Uploadbutton
         type="file"
         accept="image/*"
@@ -32,7 +32,7 @@ const AddFile = memo(({ imageUpload, name, onFileChange }) => {
         <Button onClick={onButtonClick}>{name || "눌러서 추가하기"}</Button>
       )}
       {loading && <LoadingBox></LoadingBox>}
-    </>
+    </Fragment>
   );
 });
 export default AddFile;

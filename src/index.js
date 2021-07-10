@@ -12,7 +12,7 @@ const authService = new AuthService();
 const imageUpload = new ImageUpload();
 const moviesDatabase = new MoviesDatabase();
 ReactDOM.render(
-  <>
+  <React.StrictMode>
     <GlobalStyles />
     <ThemeProvider theme={theme}>
       <App
@@ -21,6 +21,6 @@ ReactDOM.render(
         moviesDatabase={moviesDatabase}
       />
     </ThemeProvider>
-  </>,
+  </React.StrictMode>,
   document.getElementById("root")
 );

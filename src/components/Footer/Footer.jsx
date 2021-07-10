@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, Fragment } from "react";
 import styled from "styled-components";
 
 const Footer = memo(({ onLogout }) => {
@@ -6,12 +6,12 @@ const Footer = memo(({ onLogout }) => {
     <FooterBox>
       <FooterText>
         {onLogout && (
-          <>
+          <Fragment>
             <Icon src="/images/movie.png" alt="icon" />
             <a href="https://github.com/hye-ss929/Movie-Collection">
               <Icon src="/images/github.png" alt="Github" />
             </a>
-          </>
+          </Fragment>
         )}
       </FooterText>
     </FooterBox>
